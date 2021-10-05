@@ -1,16 +1,23 @@
 def numberOfWays(arr, k):
   ways = 0
-  sols = []
-  for i in range(len(arr)):
-     for j in range(len(arr)):
-        
-        if i == j or (j, i) in sols:
-           continue
-        
-        if arr[i] + arr[j] == k:
-          print(arr[i], arr[j])
-          ways += 1
-          sols.append((i,j))
+  hm = {}
+  for i in arr:
+    if i not in hm:
+      hm[i] = 1
+    else:
+      hm[i] += 1
 
-  return ways
- 
+  print(hm)
+  
+  if (k / 2) in hm:
+    x = hm[k/2]
+    ways += x * (x - 1 ) / 2
+
+  for i in arr:
+    if (k - i) in hm:
+      ways += 1
+  
+  print(ways)
+  print(ways/2)
+  
+  return ways // 2
